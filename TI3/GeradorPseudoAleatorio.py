@@ -40,16 +40,19 @@ class GeradorPseudoAleatório():
     def fibonacci(self, count):
         for i in range(2,count):
             new_fib = self.lagged_fib_values[i - 1] + self.lagged_fib_values[i - 2] % self.lfg_m
-            #print(i)
             self.lagged_fib_values.append(new_fib)
         return new_fib
+    
+    #inicia os l valores inciais do algoritmo
     def init_lagged_fib(self):
         self.lagged_fib_values = [0,1]
         self.fibonacci(self.lfg_l)
 
     def lfg(self):
         binary = ""
+        # Para o tamanho de bis especificado gera os bits
         for i in range(self.tamanho):
+            # Gera o i número aleatório confer os 
             si = (self.lagged_fib_values[self.lfg_seed + i - self.lfg_l] +
                   self.lagged_fib_values[self.lfg_seed + i - self.lfg_k]) % self.lfg_m
             zi = si % 2
@@ -89,7 +92,7 @@ for tamanho in tamanhos:
     end_time = time.time()
     elapsed_time = end_time - start_time
     elapsed_times_lcg.append(elapsed_time)
-
+print(elapsed_times_lcg)
 elapsed_times_lfg = []
 gerador.set_algoritimo("LFG")
 for tamanho in tamanhos:
