@@ -1,4 +1,5 @@
 import time
+import math
 
 class GeradorPseudoAleatório():
     def __init__(self, tamanho, algoritimo = "LCG") -> None:
@@ -6,7 +7,7 @@ class GeradorPseudoAleatório():
         self.lcg_m = 19993
         self.lcg_a = 15005
         self.lcg_b = 8371
-        self.lcg_seed = 1
+        self.lcg_seed = 135
         ################
         # Definição dos parametros para o LFG
         self.lfg_l = 17
@@ -81,9 +82,9 @@ class GeradorPseudoAleatório():
         self.lcg_seed += 1
         return binary
 
-tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
-gerador = GeradorPseudoAleatório(40)
-elapsed_times_lcg = []
+'''tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
+gerador = GeradorPseudoAleatório(4096)'''
+'''elapsed_times_lcg = []
 for tamanho in tamanhos:
     start_time = time.time()
     gerador.set_tamanho(tamanho)
@@ -104,4 +105,4 @@ for tamanho in tamanhos:
     elapsed_time = end_time - start_time
     elapsed_times_lfg.append(elapsed_time)
 
-print(elapsed_times_lfg)
+print(elapsed_times_lfg)'''
