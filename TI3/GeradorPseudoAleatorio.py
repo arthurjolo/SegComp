@@ -32,6 +32,10 @@ class GeradorPseudoAleatório():
     def get_algoritimo(self):
         return self.algoritimo
     
+    def set_seed(self, seed):
+        self.lfg_seed = seed
+        self.lcg_seed = seed
+    
     def gerar_numero(self):
         if(self.algoritimo == "LCG"):
             return int(self.lcg(),2)

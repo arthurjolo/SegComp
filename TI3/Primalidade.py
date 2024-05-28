@@ -1,5 +1,5 @@
 from GeradorPseudoAleatorio import GeradorPseudoAleatório
-import math
+import time
 
 class TestePrimalidade():
     def __init__(self, tamanho, algoritmo ="Miller"):
@@ -10,13 +10,16 @@ class TestePrimalidade():
     def set_algoritmo(self, algoritmo):
         self.algoritmo = algoritmo
     
-    def gerar_numero_primo(self):
+    def set_tamanho(self, tamanho):
+        self.tamanho = tamanho
+        self.gerador.set_tamanho(tamanho)
+    
+    def gerar_numero(self):
         while True:
             candidato_primo = self.gerador.gerar_numero()
         #print(self.test_primalidade(5850725702766829291491370712136286009948642125131436113342815786444567))
             if(candidato_primo %2 != 0):
                 if(self.test_primalidade(candidato_primo)):
-                    print(candidato_primo)
                     return candidato_primo
             
     def test_primalidade(self, candidato_primo):
@@ -38,7 +41,7 @@ class TestePrimalidade():
         # Geração de um a aleatório não divisivel pelo candidato n
         #entre 2 e n-1 para facilitar a geração.
         a = self.gerador.gerar_numero() % (candidato)
-        while(a <= 2):
+        while(a < 2):
             a = self.gerador.gerar_numero() % (candidato)
         
         # Retorna se a^n-1 é congruente a 1 mod n
@@ -72,5 +75,35 @@ class TestePrimalidade():
         return False
     
 primalidade = TestePrimalidade(1024)
-tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
-primalidade.gerar_numero_primo()
+'''tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
+
+elapsed_times_miller_lcg = []
+for tamanho in tamanhos:
+   
+    primalidade.set_tamanho(tamanho)
+    print(f"Gerando primo com {tamanho} bits")
+    start_time = time.time()
+    numer_gerado = primalidade.gerar_numero()
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"primo gerado {numer_gerado}; em {elapsed_time} segundos")
+    print(f"Valido pelo outro teste? {primalidade.fermat(numer_gerado)}")
+    print()
+    print()
+    elapsed_times_miller_lcg.append(elapsed_time)
+
+primalidade.set_algoritmo("Fermat")
+elapsed_times_fermat_lcg = []
+for tamanho in tamanhos:
+   
+    primalidade.set_tamanho(tamanho)
+    print(f"Gerando primo com {tamanho} bits")
+    start_time = time.time()
+    numer_gerado = primalidade.gerar_numero()
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"primo gerado {numer_gerado}; em {elapsed_time} segundos")
+    print(f"Valido pelo outro teste? {primalidade.miller_habin(numer_gerado)}")
+    print()
+    print()
+    elapsed_times_fermat_lcg.append(elapsed_time)'''
