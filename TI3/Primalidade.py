@@ -22,6 +22,12 @@ class TestePrimalidade():
     def test_primalidade(self, candidato_primo):
         if(self.algoritmo == "Miller"):
             for i in range(4):
+                if(not(self.miller_habin(candidato_primo))):
+                    return False
+            return True
+        
+        elif(self.algoritmo == "Fermat"):
+            for i in range(4):
                 if(not(self.fermat(candidato_primo))):
                     return False
             return True
@@ -42,15 +48,15 @@ class TestePrimalidade():
         n_1 = candidato - 1
         k = 1
         # Achando a parte impar de n - 1
-        m = n_1 / 2
+        m = n_1 // 2
         while (m % 2 == 0):
-            m = m/2
+            m = m//2
             k += 1
-        m = int(m)
+
         # geração de um número aleatório entre 2 e n-2
-        a = self.gerador.gerar_numero() % (n_1)
-        while(a < 2):
-            a = self.gerador.gerar_numero() % (n_1)
+        a = self.gerador.gerar_numero() % (candidato)
+        while(a <= 2):
+            a = self.gerador.gerar_numero() % (candidato)
         # b = (a^m) mod n se = 1 então retorna primo
         # uma vez que 1² mod n sempre = 1 mod n
         b = pow(a,m,candidato)
@@ -65,6 +71,6 @@ class TestePrimalidade():
             b = pow(b,2, candidato)
         return False
     
-primalidade = TestePrimalidade(128)
+primalidade = TestePrimalidade(1024)
+tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
 primalidade.gerar_numero_primo()
-print(primalidade.miller_habin(197631754590221660197139318512004370103))
